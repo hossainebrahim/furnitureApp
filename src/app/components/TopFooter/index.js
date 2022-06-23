@@ -23,7 +23,7 @@ const TopFooter = () => {
                 <input
                   type="button"
                   value="Subscribe"
-                  className=" bg-black sm:px-4 sm:py-[12px] text-white  py-[10px] px-1"
+                  className=" bg-black sm:px-4 sm:py-[10px] text-white  py-[10px] px-1"
                 />
               </div>
             </div>
