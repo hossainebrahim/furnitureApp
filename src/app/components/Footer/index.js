@@ -25,25 +25,25 @@ const Footer = () => {
               <div className="flex flex-col space-y-3 ">
                 <a
                   href=""
-                  className="text-slate-300 text-decoration-none hover:text-white"
+                  className="text-slate-300 no-underline hover:underline hover:text-white"
                 >
                   Our story
                 </a>
                 <a
                   href=""
-                  className="text-slate-300 text-decoration-none hover:text-white"
+                  className="text-slate-300 no-underline hover:underline hover:text-white"
                 >
                   Designer
                 </a>
                 <a
                   href=""
-                  className="text-slate-300 text-decoration-none hover:text-white"
+                  className="text-slate-300 no-underline hover:underline hover:text-white"
                 >
                   Craftsmanship
                 </a>
                 <a
                   href=""
-                  className="text-slate-300 text-decoration-none hover:text-white"
+                  className="text-slate-300 no-underline hover:underline hover:text-white"
                 >
                   Sustainability
                 </a>
@@ -54,26 +54,26 @@ const Footer = () => {
               <div className="flex flex-col space-y-3">
                 <a
                   href=""
-                  className="text-slate-300 text-decoration-none hover:text-white"
+                  className="text-slate-300 no-underline hover:underline hover:text-white"
                 >
                   {" "}
                   FAQs
                 </a>
                 <a
                   href=""
-                  className="text-slate-300 text-decoration-none hover:text-white"
+                  className="text-slate-300 no-underline hover:underline hover:text-white"
                 >
                   shipping & Returns
                 </a>
                 <a
                   href=""
-                  className="text-slate-300 text-decoration-none hover:text-white"
+                  className="text-slate-300 no-underline hover:underline hover:text-white"
                 >
                   Care guide
                 </a>
                 <a
                   href=""
-                  className="text-slate-300 text-decoration-none hover:text-white"
+                  className="text-slate-300 no-underline hover:underline hover:text-white"
                 >
                   Warranty
                 </a>
@@ -83,22 +83,20 @@ const Footer = () => {
               <h4>Contact us</h4>
               <p className="flex items-center text-slate-300">
                 <ImPhone />
-                {""}
-                +276473276
+                <span className="ml-2">+276473276</span>
               </p>
               <p className="flex items-center text-slate-300">
                 <MdEmail />
-                {""}
-                hello@gmail.com
+                <span className="ml-2">hello@gmail.com</span>
               </p>
               <div className="flex space-x-4 mt-3">
-                <span>
+                <span className="cursor-pointer bg-slate-600 p-2 hover:bg-[#3b5998]">
                   <FaFacebookF size={25} />
                 </span>
-                <span>
+                <span className="cursor-pointer bg-slate-600 p-2 hover:bg-[#405DE6]">
                   <AiFillInstagram size={25} />
                 </span>
-                <span>
+                <span className="cursor-pointer bg-slate-600 p-2 hover:bg-[#00ACEE]">
                   <BsTwitter size={25} />
                 </span>
               </div>

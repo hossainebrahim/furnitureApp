@@ -8,7 +8,7 @@ function Nav() {
       <div className="bg-[#f9f7f3]">
         <nav className="navbar navbar-expand-lg navbar-light">
           <div className="container">
-            <a className="navbar-brand text-5xl" href="#">
+            <a className="text-3xl no-underline text-black" href="/">
               Furniture
             </a>
             <button

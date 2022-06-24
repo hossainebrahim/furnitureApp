@@ -9,8 +9,8 @@ function Card({ title, dis }) {
           <div className="bg-gray-100 p-3 rounded-full mr-8">
             <FaTruck color="red" size={30} />
           </div>
-          <div>
-            <h3 className="text-2xl">{title}</h3>
+          <div className="flex justify-center flex-col">
+            <h3 className="sm:text-xl">{title}</h3>
             <p className="w-4/5">{dis}</p>
           </div>
         </div>

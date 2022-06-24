@@ -1,45 +1,74 @@
 import React from "react";
 import Product from "./Product";
+import { useEffect, useState } from "react";
+import { Bars } from "react-loader-spinner";
 
 const Products = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [loadedProducts, setLoadedProducts] = useState([]);
+
+  const getProducts = async () => {
+    setLoading(true);
+    const response = await fetch(
+      "https://course-api.com/react-store-products"
+    ).then((res) => res.json());
+    setProducts(response);
+    setLoadedProducts(createPagination(response));
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+  const createPagination = (items, limit = 8, offset = 0) => {
+    let arr = [];
+    items.forEach((item, index) => {
+      if (index >= offset && index < offset + limit) {
+        arr.push(item);
+      }
+    });
+    return arr;
+  };
+
+  const loadMore = () => {
+    if (loadedProducts.length == products.length) return;
+    const newProducts = createPagination(products, 8, loadedProducts.length);
+    setLoadedProducts([...loadedProducts, ...newProducts]);
+  };
   return (
-    <div className="py-12">
-      <div className="container">
-        <div className="flex justify-between">
-          <h1>Shop by Product</h1>
-          <p className="w-[30%]">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod et
-            illum distinctio.
-          </p>
-        </div>
-        <div className="row">
-          <div className="col-md-3">
-            <Product
-              img="https://media.istockphoto.com/photos/isolated-round-wooden-table-on-white-picture-id147804845?k=20&m=147804845&s=612x612&w=0&h=hjdSmkpg-FcfsNQfJNx5aMxTcOkbYDkko-vywqQoC4s="
-              btn="Tables"
-            />
+    <>
+      <section className="block h-auto">
+        <div className="container md:w-5/6 mx-auto px-2 md:px-0">
+          <div className="grid md:grid-cols-2 grid-cols-1 justify-center items-center gap-9 my-12">
+            <h2 className="text-5xl font-bold leading-tight ">
+              Shop by Product
+            </h2>
           </div>
-          <div className="col-md-3">
-            <Product
-              img="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1580742487-resize.jpg?crop=1xw:1xh;center,top&resize=480:*"
-              btn="Chairs"
-            />
-          </div>
-          <div className="col-md-3">
-            <Product
-              img="https://www.lemamobili.com/media/catalog/product/cache/3053bdc5e078d78e9527b2d380cab5fd/l/e/lema_brick-lane_divani-x3-divano-extracomfort.jpeg"
-              btn="Sofas"
-            />
-          </div>
-          <div className="col-md-3">
-            <Product
-              img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxqKfJZBbPuAY24m5TKuKfSxQUnsfXk9ZGeg&usqp=CAU"
-              btn="Stools"
-            />
+          <div>
+            <div className="flex flex-wrap">
+              {loading && (
+                <div className="flex justify-center w-full my-10">
+                  <Bars color="#E1C8B4" ariaLabel="loading" />
+                </div>
+              )}
+              {!!loadedProducts.length &&
+                loadedProducts?.map((product) => (
+                  <Product key={product?.id} {...product} />
+                ))}
+            </div>
+            {loadedProducts.length != products.length && (
+              <button
+                onClick={loadMore}
+                className="bg-black mx-auto text-white px-11 py-3 block"
+              >
+                Load More
+              </button>
+            )}
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 };
 
