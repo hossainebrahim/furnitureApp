@@ -2,11 +2,15 @@ import React from "react";
 import Product from "./Product";
 import { useEffect, useState } from "react";
 import { Bars } from "react-loader-spinner";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, selectItems } from "../redux/slices/basketSlice";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loadedProducts, setLoadedProducts] = useState([]);
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectItems);
 
   const getProducts = async () => {
     setLoading(true);
@@ -36,6 +40,20 @@ const Products = () => {
     const newProducts = createPagination(products, 8, loadedProducts.length);
     setLoadedProducts([...loadedProducts, ...newProducts]);
   };
+
+  const addToBasket = (product) => {
+    dispatch(
+      addItem({
+        ...product,
+        quantity: 1,
+      })
+    );
+  };
+  const checkItemExists = (id) => {
+    const find = cartItems.filter((item) => item.id === id);
+    return !!find.length;
+  };
+
   return (
     <>
       <section className="block h-auto">
@@ -54,7 +72,12 @@ const Products = () => {
               )}
               {!!loadedProducts.length &&
                 loadedProducts?.map((product) => (
-                  <Product key={product?.id} {...product} />
+                  <Product
+                    key={product?.id}
+                    {...product}
+                    onClick={() => addToBasket(product)}
+                    exists={checkItemExists}
+                  />
                 ))}
             </div>
             {loadedProducts.length != products.length && (
