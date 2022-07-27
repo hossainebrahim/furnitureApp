@@ -1,10 +1,22 @@
 import React from "react";
 import { FaCartPlus } from "react-icons/fa";
 import { BsFillCartCheckFill } from "react-icons/bs";
+import { Link, useNavigate } from "react-router-dom";
 
 const Product = ({ image, id, company, name, price, onClick, exists }) => {
+  const navigate = useNavigate();
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    navigate(`/products/${id}`);
+  };
+
   return (
-    <div className=" bg-red relative lg:w-3/12 md:w-4/12 sm:w-6/12 w-full mb-10">
+    <a
+      onClick={handleClick}
+      href={`/products/${id}`}
+      className=" bg-red relative lg:w-3/12 md:w-4/12 sm:w-6/12 w-full mb-10 no-underline"
+    >
       <div className="mx-4 bg-[#faf6f4] rounded-lg overflow-hidden cursor-pointer">
         <img
           className="object-cover w-full h-[230px]"
@@ -12,8 +24,10 @@ const Product = ({ image, id, company, name, price, onClick, exists }) => {
           alt="shop1"
         />
         <div className="p-3">
-          <p className="text-xs capitalize">{company}</p>
-          <h3 className="text-lg font-semibold capitalize">{name}</h3>
+          <p className="text-xs capitalize text-gray-600">{company}</p>
+          <h3 className="text-lg font-semibold text-gray-700 capitalize">
+            {name}
+          </h3>
           <div className="flex justify-between items-center mt-3">
             <p className="text-gray-600 text-base">${price}</p>
             {exists(id) ? (
@@ -41,7 +55,7 @@ const Product = ({ image, id, company, name, price, onClick, exists }) => {
           </div>
         </div>
       </div>
-    </div>
+    </a>
   );
 };
 

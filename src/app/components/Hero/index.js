@@ -1,6 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Hero() {
+  // const [BannerImg, setBannerImg] = useState({
+  //   one: true,
+  //   two: false,
+  //   three: false,
+  // });
+
+  // const handerBannerControls = (data) => {
+  //   if (data === "one") {
+  //     setBannerImg({
+  //       one: true,
+  //       two: false,
+  //       three: false,
+  //     });
+  //   } else if (data === "two") {
+  //     setBannerImg({
+  //       one: false,
+  //       two: true,
+  //       three: false,
+  //     });
+  //   } else if (data === "three") {
+  //     setBannerImg({
+  //       one: false,
+  //       two: false,
+  //       three: true,
+  //     });
+  //   }
+  // };
+
   return (
     <div className="bg-[#faf5f5] h-auto">
       <div className="container flex justify-between">
