@@ -1,16 +1,39 @@
 import React from "react";
 import { BiShoppingBag } from "react-icons/bi";
+import { FiLogOut } from "react-icons/fi";
 import { MdManageAccounts } from "react-icons/md";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../../../utils/firebase";
+import { selectUser } from "../redux/slices/authSlice";
+import profile from "../../../images/profile.png";
 
-function Nav() {
+const Nav = () => {
+  const user = useSelector(selectUser);
+  const navigate = useNavigate();
+
+  const logout = () => {
+    auth
+      .signOut()
+      .then(() => {
+        // Sign-out successful.
+        navigate("/Login");
+      })
+      .catch((error) => {
+        // An error happened.
+        alert(error);
+      });
+  };
+
   return (
     <>
-      <div className="bg-[#f9f7f3]">
+      <div className="bg-[#f9f7f3] py-2 sticky top-0 z-50 shadow-sm">
         <nav className="navbar navbar-expand-lg navbar-light">
           <div className="container">
-            <a className="text-3xl no-underline text-black" href="/">
+            <Link to="/" className="text-3xl text-black no-underline">
               Furniture
-            </a>
+            </Link>
+
             <button
               className="navbar-toggler"
               type="button"
@@ -28,23 +51,23 @@ function Nav() {
             >
               <ul className="navbar-nav me-auto mb-2 mb-lg-0 flex justify-center items-center w-[100%]">
                 <li className="nav-item">
-                  <a
+                  <Link
+                    to="/"
                     className="nav-link active hover:underline"
                     aria-current="page"
-                    href="#"
                   >
                     Home
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link hover:underline" href="#">
+                  <Link to="/Product" className="nav-link hover:underline">
                     Products
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link hover:underline" href="#">
+                  <Link to="Collection" className="nav-link hover:underline">
                     Collection
-                  </a>
+                  </Link>
                 </li>
               </ul>
 
@@ -53,7 +76,18 @@ function Nav() {
                   <BiShoppingBag size={30} />
                 </span>
                 <span>
-                  <MdManageAccounts size={30} />
+                  {user ? (
+                    <div className="flex justify-center items-center gap-2">
+                      <Link to="Profile">
+                        <img className="w-8" src={profile} alt="profile" />
+                      </Link>
+                      <FiLogOut className="w-8" onClick={logout} />
+                    </div>
+                  ) : (
+                    <Link to="Register" className="text-gray-800">
+                      <MdManageAccounts size={30} />
+                    </Link>
+                  )}
                 </span>
               </div>
             </div>
@@ -62,6 +96,6 @@ function Nav() {
       </div>
     </>
   );
-}
+};
 
 export default Nav;

@@ -11,14 +11,6 @@ import {
   selectTotalCartItems,
 } from "../redux/slices/basketSlice";
 import SingleCard from "./SingleCard";
-// import {
-//   decreaseItemQuantity,
-//   increaseItemQuantity,
-//   removeItem,
-//   selectItems,
-//   selectTotalCartItems,
-//   selectTotalPrice,
-// } from "../redux/slices/basketSlice";
 
 function CartDrawer() {
   const [isOpen, setIsOpen] = useState(false);
